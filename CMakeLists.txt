@@ -54,14 +54,14 @@ if (USE_YASM)
   find_package (Yasm)
 endif ()
 
-if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7l")
+if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7-a")
   configure_file(platform/arm/config.h ${PROJECT_SOURCE_DIR}/config.h)
 else()
   configure_file(platform/x86/config.h.in ${PROJECT_SOURCE_DIR}/config.h)
   configure_file(platform/x86/config.asm.in ${PROJECT_SOURCE_DIR}/config.asm)
 endif()
 
-if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7l")
+if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7-a")
 	enable_language(ASM)
 	add_definitions(
 		-DEXTERN_ASM=
@@ -78,7 +78,7 @@ if(WIN32)
 endif()
 
 #define asm sources
-if(NOT ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7l") )
+if(NOT ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7-a") )
 if(YASM_FOUND)
 set(YASM_NAMES
     libavutil/x86/cpuid.asm
@@ -98,9 +98,9 @@ set(YASM_NAMES
     libavcodec/x86/videodsp.asm
 )
 endif(YASM_FOUND)
-endif(NOT ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7l") )
+endif(NOT ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7-a") )
 
-if(NOT ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7l") )
+if(NOT ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7-a") )
 set(COMMON_YASM_ARGS
     -I./
     -I "${CMAKE_CURRENT_SOURCE_DIR}"
@@ -109,7 +109,7 @@ set(COMMON_YASM_ARGS
     -I "${CMAKE_CURRENT_SOURCE_DIR}/libavutil/x86/"
     -DPIC
 )
-endif(NOT ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7l") )
+endif(NOT ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7-a") )
 
 if(YASM_FOUND)
 if(APPLE)
@@ -290,7 +290,7 @@ set(libfilenames
     libavcodec/vorbis_parser.c
     libavcodec/xiph.c
 )
-if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7l")
+if("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7-a")
 list(APPEND libfilenames
     libavutil/arm/cpu.c
     libavutil/arm/asm.S
@@ -353,7 +353,7 @@ list(APPEND libfilenames
     libavcodec/crypto.cpp
 )
 endif()
-if(WIN32 OR ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7l"))
+if(WIN32 OR ("${CMAKE_SYSTEM_PROCESSOR}" STREQUAL "armv7-a"))
     option (BUILD_SHARED_LIBS "enabled static library instead of shared" ON)
 else()
     option (BUILD_SHARED_LIBS "enabled static library instead of shared" OFF)
